@@ -1,10 +1,14 @@
-from gpiozero import LED
+import RPi.GPIO as GPIO
 from time import sleep
 
-red = LED(11)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT)
 
-for _ in range (25):
-	red.on()
-	sleep(2)
-	red.off()
-	print("blink")
+try:
+    while True:
+        GPIO.output(17, GPIO.HIGH)
+        sleep(.25)
+        GPIO.output(17, GPIO.LOW)
+        sleep(.50)
+except KeyboardInterrupt:
+    GPIO.cleanup()
